@@ -27,7 +27,7 @@ post '/gateway' do
     slack_users << member["name"]
   end
 
-  if slack_users.include?(poof_receiver) == nil
+  if slack_users.include?(poof_receiver)
     # poof_giver.prepend('@')
     # poof_receiver.prepend('@')
     response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
@@ -36,10 +36,10 @@ post '/gateway' do
     response_message = "Oh no! #{poof_receiver} isn't a member of this slack team :dizzy_face:"
   end
 
-  # don't let people give themselves poofs
-  if poof_giver == poof_receiver
-    response_message = "https://media0.giphy.com/media/dJtDZzyjLF66I/200.gif"
-  end
+  # # don't let people give themselves poofs
+  # if poof_giver == poof_receiver
+  #   response_message = "https://media0.giphy.com/media/dJtDZzyjLF66I/200.gif"
+  # end
 
 
   {:response_type => "in-channel", :text => response_message }.to_json

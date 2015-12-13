@@ -12,7 +12,7 @@ post '/gateway' do
   # parsing slack POST data
   trigger_word = params[:trigger_word].strip
   poof_giver = params[:user_name].strip
-  poof_receiver = params[:text].gsub(trigger_word, '').strip!
+  poof_receiver = params[:text].gsub(trigger_word, '').strip
 
   # if poof_receiver.start_with?("@")
   #   poof_receiver.slice!(0)
@@ -27,7 +27,7 @@ post '/gateway' do
   parsed_slack_data = JSON.parse(raw_slack_data)
   slack_users = []
   parsed_slack_data["members"].each do |member|
-    slack_users << member["name"]
+    slack_users << member["name"].prepend("@")
   end
 
   if slack_users.include?(poof_receiver)

@@ -14,7 +14,9 @@ post '/gateway' do
   poof_giver = params[:user_name].strip
   poof_receiver = params[:text].gsub(trigger_word, '').strip
 
-  poof_receiver.gsub!('@', '')
+  if poof_receiver.start_with?("@")
+    poof_receiver.slice!(0)
+  end
 
   # need to abstract this out if ever used with other teams
   di_slack_token = "xoxp-2151774549-4117477680-16044766884-54e7959db7"

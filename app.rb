@@ -12,7 +12,7 @@ post '/gateway' do
   # parsing slack POST data
   trigger_word = params[:trigger_word].strip
   poof_giver = params[:user_name].strip
-  poof_receiver = params[:text].gsub(trigger_word, '').delete "@"
+  poof_receiver = params[:text].gsub(trigger_word, '').delete "@".strip
 
 
   # need to abstract this out if ever used with other teams

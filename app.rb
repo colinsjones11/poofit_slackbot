@@ -15,7 +15,7 @@ post '/gateway' do
   poof_receiver = params[:text].gsub(trigger_word, '').strip
 
   if poof_receiver.include?("@")
-    poof_receiver.gsub("@", "")
+    poof_receiver.gsub('@', '')
   end
 
 
@@ -42,7 +42,7 @@ post '/gateway' do
 
   # don't let people give themselves poofs
   if poof_giver == poof_receiver
-    response_message = "https://media.giphy.com/media/3UzsN40n9zWz6/giphy.gif"
+    response_message = "https://media0.giphy.com/media/dJtDZzyjLF66I/200.gif"
   end
 
 

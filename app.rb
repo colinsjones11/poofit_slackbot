@@ -15,7 +15,7 @@ post '/gateway' do
   poof_receiver = params[:text].gsub(trigger_word, '').strip
 
   if poof_receiver.include?("@")
-    poof_receiver.gsub!("@", "")
+    poof_receiver.gsub("@", "")
   end
 
 

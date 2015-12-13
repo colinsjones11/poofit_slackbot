@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'json'
+require 'open-uri'
 
 post '/gateway' do
 
@@ -10,7 +11,7 @@ post '/gateway' do
   poof_receiver = params[:text].gsub(trigger_word, '').strip
 
 
-# make sure @poof_receiver is a slack user and formulate response message
+  # make sure @poof_receiver is a slack user and formulate response message
   di_slack_token = "xoxp-2151774549-4117477680-16044766884-54e7959db7"
   slack_api_call = "https://slack.com/api/users.list?token=#{di_slack_token}&pretty=1"
   raw_slack_data = open(slack_api_call).read

@@ -21,8 +21,11 @@ post '/gateway' do
   poof_receiver = params[:text].gsub(trigger_word, '').strip
 
 
-  # make sure @poof_receiver is a slack user and formulate response message
+
+  # need to abstract this out if ever used with other teams
   di_slack_token = "xoxp-2151774549-4117477680-16044766884-54e7959db7"
+
+  # make sure @poof_receiver is a slack user and formulate response message
   slack_api_call = "https://slack.com/api/users.list?token=#{di_slack_token}&pretty=1"
   raw_slack_data = open(slack_api_call).read
   parsed_slack_data = JSON.parse(raw_slack_data)
@@ -32,10 +35,10 @@ post '/gateway' do
   end
 
   if slack_users.include?(poof_receiver)
-    poof_receiver.add_at_symbol
+    add_at_symbol(poof_receiver)
     response_message = "#{poof_receiver} got a poof! :poof:\n(#{poof_receiver} now has x total poofs)"
   else
-    poof_receiver.add_at_symbol
+    add_at_symbol(poof_receiver)
     response_message = "#{poof_receiver} is not a member of this slack team :dizzy_face:"
   end
 

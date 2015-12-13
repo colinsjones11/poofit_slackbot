@@ -9,13 +9,14 @@ post '/gateway' do
   poof_receiver = params[:text].gsub(trigger_word, '').strip
   user_name = params[:user_name].strip
 
+  # make sure poof_receiver has @ symbol appended to front
   if poof_receiver.include? "@"
-  else poof_receiver = "@" + poof_receiver
+  else poof_receiver = poof_receiver.prepend("@")
   end
 
 
-  #switch on the message
-  # case user_name
+  # make sure poof_receiver is a slack user and formulate response_message
+  # case poof_receiver
   #   when ''
   #   else # default - ignore
   # end

@@ -7,7 +7,7 @@ post '/gateway' do
 
   trigger_word = params[:trigger_word].strip
   poof_receiver = params[:text].gsub(trigger_word, '').strip
-  user_name = params[:user_name].strip
+  poof_giver = params[:user_name].strip
 
   # make sure poof_receiver has @ symbol appended to front
   if poof_receiver.include? "@"
@@ -21,7 +21,7 @@ post '/gateway' do
   #   else # default - ignore
   # end
 
-  response_message = "#{poof_receiver} got a poof! :poof:"
+  response_message = "#{poof_receiver} got a poof! :poof:\n#{poof_receiver} now has x total poofs"
 
   content_type :json
   {:username => 'poofit', :response_type => "in-channel", :text => response_message }.to_json

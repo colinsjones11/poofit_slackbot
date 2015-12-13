@@ -5,7 +5,9 @@ require 'open-uri'
 # add at symbol to a name so slack recognizes
 def add_at_symbol(string)
   if string.start_with?("@")
-    else string.prepend("@")
+    return string
+  else
+    return string.prepend("@")
   end
 end
 
@@ -36,10 +38,10 @@ post '/gateway' do
 
   if slack_users.include?(poof_receiver)
     add_at_symbol(poof_receiver)
-    response_message = "#{poof_receiver} got a poof! :poof:\n(#{poof_receiver} now has x total poofs)"
+    response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
   else
     add_at_symbol(poof_receiver)
-    response_message = "#{poof_receiver} is not a member of this slack team :dizzy_face:"
+    response_message = "Oh no! #{poof_receiver}'s not a member of this slack team :dizzy_face:"
   end
 
 

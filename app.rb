@@ -37,11 +37,12 @@ post '/gateway' do
   end
 
   if slack_users.include?(poof_receiver)
-    add_at_symbol(poof_receiver)
-    response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
+    add_at_symbol(@poof_giver)
+    add_at_symbol(@poof_receiver)
+    response_message = "#{@poof_giver} gave #{@poof_receiver} a :poof:!"
   else
-    add_at_symbol(poof_receiver)
-    response_message = "Oh no! #{poof_receiver}'s not a member of this slack team :dizzy_face:"
+    add_at_symbol(@poof_receiver)
+    response_message = "Oh no! #{@poof_receiver}'s not a member of this slack team :dizzy_face:"
   end
 
 

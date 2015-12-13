@@ -9,10 +9,10 @@ post '/gateway' do
   # need to move this to an env variable
   return if params[:token] != 'LK1QyaEb4i9TGfd0Nb2adL8D'
 
-  # parsing out slack message components
-  trigger_word = params[:trigger_word].strip
-  poof_giver = params[:user_name].strip
-  poof_receiver = params[:text].gsub(trigger_word, '').strip
+  # parsing slack POST data
+  trigger_word = params[:trigger_word].strip!
+  poof_giver = params[:user_name].strip!
+  poof_receiver = params[:text].gsub(trigger_word, '').strip!
 
   if poof_receiver.start_with?("@")
     poof_receiver.slice!(0)

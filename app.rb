@@ -2,14 +2,6 @@ require 'sinatra'
 require 'json'
 require 'open-uri'
 
-# add at symbol to a name so slack recognizes
-def add_at_symbol(name)
-  if name.start_with?("@")
-    return name
-  else
-    return name.prepend("@")
-  end
-end
 
 # listening on '/gateway' - defined in slack webhook config and heroku
 post '/gateway' do
@@ -22,6 +14,9 @@ post '/gateway' do
   poof_giver = params[:user_name].strip
   poof_receiver = params[:text].gsub(trigger_word, '').strip
 
+  if poof_receiver.include?("@")
+    poof_receiver.tr('@', '')
+  end
 
 
   # need to abstract this out if ever used with other teams
@@ -37,11 +32,11 @@ post '/gateway' do
   end
 
   if slack_users.include?(poof_receiver)
-    add_at_symbol(poof_giver)
-    add_at_symbol(poof_receiver)
+    poof_giver.prepend('@')
+    poof_receiver.prepend('@')
     response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
   else
-    add_at_symbol(poof_receiver)
+    poof_receiver.prepend('@')
     response_message = "Oh no! #{poof_receiver}'s not a member of this slack team :dizzy_face:"
   end
 

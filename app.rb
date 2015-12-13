@@ -42,9 +42,9 @@ post '/gateway' do
 
   # don't let people give themselves poofs
   if poof_giver == poof_receiver
-    response_message = "https://media1.giphy.com/media/3UzsN40n9zWz6/200.gif"
+    response_message = "/giphy nope"
   end
 
 
-  {:username => 'poofit', :response_type => "in-channel", :text => response_message }.to_json
+  {:response_type => "in-channel", :text => response_message }.to_json
 end

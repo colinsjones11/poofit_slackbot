@@ -14,9 +14,6 @@ post '/gateway' do
   poof_giver = params[:user_name].strip
   poof_receiver = params[:text].gsub(trigger_word, '').strip
 
-  # if poof_receiver.start_with?("@")
-  #   poof_receiver.slice!(0)
-  # end
 
   # need to abstract this out if ever used with other teams
   di_slack_token = "xoxp-2151774549-4117477680-16044766884-54e7959db7"
@@ -31,12 +28,12 @@ post '/gateway' do
   end
 
   if slack_users.include?(poof_receiver) == nil
-    # poof_receiver.prepend('@')
-    response_message = "Oh no! #{poof_receiver} isn't a member of this slack team :dizzy_face:"
-  else
     # poof_giver.prepend('@')
     # poof_receiver.prepend('@')
     response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
+  else
+     # poof_receiver.prepend('@')
+    response_message = "Oh no! #{poof_receiver} isn't a member of this slack team :dizzy_face:"
   end
 
   # don't let people give themselves poofs

@@ -12,7 +12,7 @@ post '/gateway' do
   # parsing slack POST data
   trigger_word = params[:trigger_word].strip
   poof_giver = params[:user_name].strip
-  poof_receiver = params[:text].gsub(trigger_word, '').gsub("@", "").lstrip
+  poof_receiver = params[:text].gsub(trigger_word, '').gsub("@", "").delete "@"
 
 
   # need to abstract this out if ever used with other teams
@@ -29,10 +29,10 @@ post '/gateway' do
 
   if slack_users.include?(poof_receiver)
     poof_giver.prepend('@')
-    # poof_receiver.prepend('@')
+    poof_receiver.prepend('@')
     response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
   else
-     # poof_receiver.prepend('@')
+    poof_receiver.prepend('@')
     response_message = "Oh no! #{poof_receiver} isn't a member of this slack team :disappointed_relieved:"
   end
 

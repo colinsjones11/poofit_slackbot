@@ -10,13 +10,13 @@ post '/gateway' do
   return if params[:token] != 'LK1QyaEb4i9TGfd0Nb2adL8D'
 
   # parsing slack POST data
-  trigger_word = params[:trigger_word].strip!
-  poof_giver = params[:user_name].strip!
+  trigger_word = params[:trigger_word].strip
+  poof_giver = params[:user_name].strip
   poof_receiver = params[:text].gsub(trigger_word, '').strip!
 
-  if poof_receiver.start_with?("@")
-    poof_receiver.slice!(0)
-  end
+  # if poof_receiver.start_with?("@")
+  #   poof_receiver.slice!(0)
+  # end
 
   # need to abstract this out if ever used with other teams
   di_slack_token = "xoxp-2151774549-4117477680-16044766884-54e7959db7"

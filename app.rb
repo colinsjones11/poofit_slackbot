@@ -2,33 +2,18 @@ require 'sinatra'
 require 'httparty'
 require 'json'
 
-post '/poofit' do
-  message = params[:text].gsub(params[:trigger_word], '').strip
+post '/gateway' do
+  trigger_word = params[:trigger_word].strip
+  message = params[:text].gsub(trigger_word, '').strip
 
-  case message
-    when 'hello'
-      response = "hello there!"
-    end
-  end
+  #switch on the message
+  # case message
+  #   when 'hello'
+  #   else # default - ignore
+  # end
 
+  response_message = "Here's a poof! :poof:"  #default response
 
-#   action, repo = message.split('_').map {|c| c.strip.downcase }
-#   repo_url = "https://api.github.com/repos/#{repo}"
-
-#   case action
-#     when 'issues'
-#       resp = HTTParty.get(repo_url)
-#       resp = JSON.parse resp.body
-#       respond_message "There are #{resp['open_issues_count']} open issues on #{repo}"
-#   end
-# end
-
-# def respond_message message
-#   content_type :json
-#   {:text => message}.to_json
-# end
-
-def respond_message message
   content_type :json
-  {:text => response}.to_json
+  {:username => 'poofit', :response_type => "in-channel", :text => response_message }.to_json
 end

@@ -15,7 +15,7 @@ post '/gateway' do
   poof_receiver = params[:text].gsub(trigger_word, '').strip
 
   if poof_receiver.include?("@")
-    poof_receiver.tr('@', '')
+    poof_receiver.gsub!("@", "")
   end
 
 
@@ -37,12 +37,12 @@ post '/gateway' do
     response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
   else
     poof_receiver.prepend('@')
-    response_message = "Oh no! #{poof_receiver}'s not a member of this slack team :dizzy_face:"
+    response_message = "Oh no! #{poof_receiver} isn't a member of this slack team :dizzy_face:"
   end
 
   # don't let people give themselves poofs
   if poof_giver == poof_receiver
-    response_message = "/giphy nope"
+    response_message = "https://media.giphy.com/media/3UzsN40n9zWz6/giphy.gif"
   end
 
 

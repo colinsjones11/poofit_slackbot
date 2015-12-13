@@ -3,11 +3,11 @@ require 'json'
 require 'open-uri'
 
 # add at symbol to a name so slack recognizes
-def add_at_symbol(string)
-  if string.start_with?("@")
-    return string
+def add_at_symbol(name)
+  if name.start_with?("@")
+    return name
   else
-    return string.prepend("@")
+    return name.prepend("@")
   end
 end
 
@@ -37,12 +37,17 @@ post '/gateway' do
   end
 
   if slack_users.include?(poof_receiver)
-    add_at_symbol(@poof_giver)
-    add_at_symbol(@poof_receiver)
-    response_message = "#{@poof_giver} gave #{@poof_receiver} a :poof:!"
+    add_at_symbol(poof_giver)
+    add_at_symbol(poof_receiver)
+    response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
   else
-    add_at_symbol(@poof_receiver)
-    response_message = "Oh no! #{@poof_receiver}'s not a member of this slack team :dizzy_face:"
+    add_at_symbol(poof_receiver)
+    response_message = "Oh no! #{poof_receiver}'s not a member of this slack team :dizzy_face:"
+  end
+
+  # don't let people give themselves poofs
+  if poof_giver == poof_receiver
+    response_message = "/giphy nope"
   end
 
 

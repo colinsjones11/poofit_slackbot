@@ -24,7 +24,7 @@ post '/gateway' do
   parsed_slack_data = JSON.parse(raw_slack_data)
   slack_users = []
   parsed_slack_data["members"].each do |member|
-    slack_users << member["name"]
+    slack_users << "<#{member["id"]}>"
   end
 
   if slack_users.include?(poof_receiver)
@@ -42,5 +42,5 @@ post '/gateway' do
   # end
 
 
-  {:response_type => "in-channel", :text => response_message}.to_json
+  {:response_type => "in-channel", :text => response_message, :parse => "full"}.to_json
 end

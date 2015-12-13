@@ -15,7 +15,7 @@ post '/gateway' do
   #   else # default - ignore
   # end
 
-  response_message = "#{user_name} got a poof! :poof:"  #default response
+  response_message = "#{message} got a poof! :poof:"  #default response
 
   content_type :json
   {:username => 'poofit', :response_type => "in-channel", :text => response_message }.to_json

@@ -2,7 +2,7 @@ require 'sinatra'
 require 'httparty'
 require 'json'
 
-post '/gateway' do
+post '/poofit' do
   message = params[:text].gsub(params[:trigger_word], '').strip
 
   case message

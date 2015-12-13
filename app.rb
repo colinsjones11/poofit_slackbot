@@ -42,5 +42,5 @@ post '/gateway' do
   # end
 
 
-  {:response_type => "in-channel", :text => response_message, parse=full }.to_json
+  {:response_type => "in-channel", :text => response_message, :parse => "full" }.to_json
 end

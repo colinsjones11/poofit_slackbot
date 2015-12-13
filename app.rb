@@ -27,16 +27,16 @@ post '/gateway' do
   parsed_slack_data = JSON.parse(raw_slack_data)
   slack_users = []
   parsed_slack_data["members"].each do |member|
-    slack_users << member["name"].prepend("@")
+    slack_users << member["name"]
   end
 
-  if slack_users.include?(poof_receiver)
+  if slack_users.include?(poof_receiver) == nil
+    # poof_receiver.prepend('@')
+    response_message = "Oh no! #{poof_receiver} isn't a member of this slack team :dizzy_face:"
+  else
     # poof_giver.prepend('@')
     # poof_receiver.prepend('@')
     response_message = "#{poof_giver} gave #{poof_receiver} a :poof:!"
-  else
-    # poof_receiver.prepend('@')
-    response_message = "Oh no! #{poof_receiver} isn't a member of this slack team :dizzy_face:"
   end
 
   # don't let people give themselves poofs

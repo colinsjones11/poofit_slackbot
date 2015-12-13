@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'httparty'
 require 'json'
 
 post '/gateway' do

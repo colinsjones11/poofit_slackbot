@@ -24,7 +24,7 @@ post '/gateway' do
   parsed_slack_data = JSON.parse(raw_slack_data)
   slack_users = []
   parsed_slack_data["members"].each do |member|
-    slack_users << "<#{member["id"]}>"
+    slack_users << "<@#{member["id"]}>"
   end
 
   if slack_users.include?(poof_receiver)

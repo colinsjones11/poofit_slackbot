@@ -3,7 +3,7 @@ require 'json'
 
 post '/gateway' do
 
-  return if params[:token] != ENV['SLACK_TOKEN']
+  return if params[:token] != 'LK1QyaEb4i9TGfd0Nb2adL8D'
 
   trigger_word = params[:trigger_word].strip
   message = params[:text].gsub(trigger_word, '').strip
